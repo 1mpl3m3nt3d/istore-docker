@@ -2,38 +2,110 @@ version: "3.9"
 
 services:
   nginx:
-    image: nginx:alpine
+    image: nginx:alpine-perl
     container_name: lde.nginx
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
   postgres:
     image: postgres:alpine
     container_name: lde.postgres
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
   pgadmin4:
     image: dpage/pgadmin4:latest
     container_name: lde.pgadmin4
+    depends_on:
+      - postgres
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
   redis:
     image: redis:alpine
     container_name: lde.redis
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
   identityserver:
     container_name: lde.identityserver
-    build:
-      context: ../istore-identityserver/.
-      dockerfile: ../istore-identityserver/IdentityServer/IdentityServer/Dockerfile.dev
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
   catalog.api:
     container_name: lde.catalog.api
-    build:
-      context: ../istore-catalog/.
-      dockerfile: ../istore-catalog/Catalog/Catalog.Host/Dockerfile.dev
+    depends_on:
+      - postgres
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
   basket.api:
     container_name: lde.basket.api
-    build:
-      context: ../istore-basket/.
-      dockerfile: ../istore-basket/Basket/Basket.Host/Dockerfile.dev
+    depends_on:
+      - redis
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  web.client:
+    container_name: lde.web.client
+    restart: "no"
+    network_mode: "bridge"
+    networks:
+      - default
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "5"
 
 networks:
   default:
