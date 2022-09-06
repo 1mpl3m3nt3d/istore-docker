@@ -58,7 +58,7 @@ services:
 
   identityserver:
     build:
-      network: default
+      network: host
       context: ../istore-identityserver/.
       dockerfile: ./IdentityServer/IdentityServer/Dockerfile.prod
       cache_from:
@@ -83,7 +83,7 @@ services:
 
   catalog.api:
     build:
-      network: default
+      network: host
       context: ../istore-catalog/.
       dockerfile: ./Catalog/Catalog.Host/Dockerfile.prod
       cache_from:
@@ -114,7 +114,7 @@ services:
 
   basket.api:
     build:
-      network: default
+      network: host
       context: ../istore-basket/.
       dockerfile: ./Basket/Basket.Host/Dockerfile.prod
       cache_from:
@@ -143,7 +143,7 @@ services:
 
   web.client:
     build:
-      network: default
+      network: host
       context: ../istore-webclient/.
       dockerfile: ./Dockerfile.prod
       target: prod
