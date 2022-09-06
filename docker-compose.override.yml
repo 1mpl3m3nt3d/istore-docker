@@ -73,9 +73,9 @@ services:
       - ASPNETCORE_URLS=http://+:5002
       - BasketApi=http://host.docker.internal:5003
       - CatalogApi=http://host.docker.internal:5000
-      - GlobalUrl=http://host.docker.internal
+      - GlobalUrl=http://host.docker.internal:5001
       - IdentityUrl=http://host.docker.internal:5002
-      - SpaUrl=http://host.docker.internal:5001
+      - SpaUrl=http://host.docker.internal:8080
     ports:
       - "5002:5002"
     expose:
@@ -106,7 +106,7 @@ services:
       - Database__ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__EnvVar=
       - PathBase=http://host.docker.internal:5000
-      - SpaUrl=http://host.docker.internal:5001
+      - SpaUrl=http://host.docker.internal:8080
     ports:
       - "5000:5000"
     expose:
@@ -135,7 +135,7 @@ services:
       - Redis__CacheTimeout=48:00:00
       - Redis__EnvVar=
       - Redis__Host=host.docker.internal:6380
-      - SpaUrl=http://host.docker.internal:5001
+      - SpaUrl=http://host.docker.internal:8080
     ports:
       - "5003:5003"
     expose:
@@ -146,7 +146,7 @@ services:
       network: default
       context: ../istore-webclient/.
       dockerfile: ./Dockerfile.dev
-      target: development
+      target: dev
       cache_from:
         - node:alpine
       labels:
@@ -157,7 +157,7 @@ services:
       - ../istore-webclient/public:/app/public
       - ../istore-webclient/src:/app/src
     env_file:
-      - ../istore-webclient/.env.docker.development
+      - ../istore-webclient/.env.docker.dev
     environment:
       - COMPOSE_CONVERT_WINDOWS_PATHS=1
     ports:
