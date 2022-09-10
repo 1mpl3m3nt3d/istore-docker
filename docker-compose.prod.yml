@@ -129,12 +129,12 @@ services:
       - ASPNETCORE_URLS=http://+:5003
       - Authorization__Authority=http://host.docker.internal:5002
       - Authorization__SiteAudience=host.docker.internal
-      - Client__Id=catalog
+      - Client__Id=basket
       - Client__Secret=secret
       - PathBase=http://host.docker.internal:5003
       - Redis__CacheTimeout=48:00:00
+      - Redis__ConnectionString=host.docker.internal:6380
       - Redis__EnvVar=
-      - Redis__Host=host.docker.internal:6380
       - SpaUrl=http://host.docker.internal:8080
     ports:
       - "5003:5003"
