@@ -73,9 +73,9 @@ services:
       - ASPNETCORE_URLS=http://+:5002
       - BasketApi=http://host.docker.internal:5003
       - CatalogApi=http://host.docker.internal:5000
-      - GlobalUrl=http://host.docker.internal:5001
+      - GlobalUrl=http://host.docker.internal:8080
       - IdentityUrl=http://host.docker.internal:5002
-      - SpaUrl=http://host.docker.internal:8080
+      - SpaUrl=http://host.docker.internal:5001
     ports:
       - "5002:5002"
     expose:
@@ -104,9 +104,9 @@ services:
       - Client__Secret=secret
       - Database__ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__EnvVar=
-      - GlobalUrl=http://host.docker.internal:5001
+      - GlobalUrl=http://host.docker.internal:8080
       - PathBase=http://host.docker.internal:5000
-      - SpaUrl=http://host.docker.internal:8080
+      - SpaUrl=http://host.docker.internal:5001
     ports:
       - "5000:5000"
     expose:
@@ -131,12 +131,12 @@ services:
       - Authorization__SiteAudience=host.docker.internal
       - Client__Id=basket
       - Client__Secret=secret
-      - GlobalUrl=http://host.docker.internal:5001
+      - GlobalUrl=http://host.docker.internal:8080
       - PathBase=http://host.docker.internal:5003
       - Redis__CacheTimeout=48:00:00
       - Redis__ConnectionString=host.docker.internal:6380
       - Redis__EnvVar=
-      - SpaUrl=http://host.docker.internal:8080
+      - SpaUrl=http://host.docker.internal:5001
     ports:
       - "5003:5003"
     expose:
