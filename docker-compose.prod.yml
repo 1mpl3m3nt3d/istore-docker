@@ -102,7 +102,6 @@ services:
       - Catalog__ImgUrl=assets/images
       - Client__Id=catalog
       - Client__Secret=secret
-      - ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__EnvVar=
       - PathBase=http://host.docker.internal:5000
