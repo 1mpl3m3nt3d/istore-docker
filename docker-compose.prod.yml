@@ -104,6 +104,7 @@ services:
       - Client__Secret=secret
       - Database__ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__EnvVar=
+      - GlobalUrl=http://host.docker.internal:5001
       - PathBase=http://host.docker.internal:5000
       - SpaUrl=http://host.docker.internal:8080
     ports:
@@ -130,6 +131,7 @@ services:
       - Authorization__SiteAudience=host.docker.internal
       - Client__Id=basket
       - Client__Secret=secret
+      - GlobalUrl=http://host.docker.internal:5001
       - PathBase=http://host.docker.internal:5003
       - Redis__CacheTimeout=48:00:00
       - Redis__ConnectionString=host.docker.internal:6380
