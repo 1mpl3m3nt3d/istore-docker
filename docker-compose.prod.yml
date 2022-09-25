@@ -70,12 +70,20 @@ services:
       project: "iStore_IdentityServer"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5002
       - BasketApi=http://host.docker.internal:5003
       - CatalogApi=http://host.docker.internal:5000
       - GlobalUrl=http://host.docker.internal:8080
       - IdentityUrl=http://host.docker.internal:5002
       - SpaUrl=http://host.docker.internal:5001
+      - Nginx__UseNginx=false
+      - Nginx__UseInitFile=true
+      - Nginx__UsePort=false
+      - Nginx__UseUnixSocket=false
+      - Nginx__InitFilePath=/tmp/app-initialized
+      - Nginx__Port=
+      - Nginx__UnixSocketPath=/tmp/nginx.socket
     ports:
       - "5002:5002"
     expose:
@@ -95,6 +103,7 @@ services:
       project: "iStore_Catalog.Host"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5000
       - Authorization__Authority=http://host.docker.internal:5002
       - Authorization__SiteAudience=host.docker.internal
@@ -107,6 +116,13 @@ services:
       - GlobalUrl=http://host.docker.internal:8080
       - PathBase=http://host.docker.internal:5000
       - SpaUrl=http://host.docker.internal:5001
+      - Nginx__UseNginx=false
+      - Nginx__UseInitFile=true
+      - Nginx__UsePort=false
+      - Nginx__UseUnixSocket=false
+      - Nginx__InitFilePath=/tmp/app-initialized
+      - Nginx__Port=
+      - Nginx__UnixSocketPath=/tmp/nginx.socket
     ports:
       - "5000:5000"
     expose:
@@ -126,6 +142,7 @@ services:
       project: "iStore_Basket.Host"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5003
       - Authorization__Authority=http://host.docker.internal:5002
       - Authorization__SiteAudience=host.docker.internal
@@ -137,6 +154,13 @@ services:
       - Redis__ConnectionString=host.docker.internal:6380
       - Redis__EnvVar=
       - SpaUrl=http://host.docker.internal:5001
+      - Nginx__UseNginx=false
+      - Nginx__UseInitFile=true
+      - Nginx__UsePort=false
+      - Nginx__UseUnixSocket=false
+      - Nginx__InitFilePath=/tmp/app-initialized
+      - Nginx__Port=
+      - Nginx__UnixSocketPath=/tmp/nginx.socket
     ports:
       - "5003:5003"
     expose:
