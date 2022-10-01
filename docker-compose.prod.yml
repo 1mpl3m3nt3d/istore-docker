@@ -72,11 +72,13 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5002
+      - BasePath=/identity
       - BasketApi=http://host.docker.internal:5003
       - CatalogApi=http://host.docker.internal:5000
       - GlobalUrl=http://host.docker.internal:8080
       - IdentityUrl=http://host.docker.internal:5002
       - SpaUrl=http://host.docker.internal:5001
+      - HttpLoggint=false
       - Nginx__UseNginx=false
       - Nginx__UseInitFile=true
       - Nginx__UsePort=false
@@ -113,9 +115,11 @@ services:
       - Client__Secret=secret
       - Database__ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__EnvVar=
+      - BasePath=/catalog
+      - CatalogApi=http://host.docker.internal:5000
       - GlobalUrl=http://host.docker.internal:8080
-      - PathBase=http://host.docker.internal:5000
       - SpaUrl=http://host.docker.internal:5001
+      - HttpLoggint=false
       - Nginx__UseNginx=false
       - Nginx__UseInitFile=true
       - Nginx__UsePort=false
@@ -148,12 +152,14 @@ services:
       - Authorization__SiteAudience=host.docker.internal
       - Client__Id=basket
       - Client__Secret=secret
-      - GlobalUrl=http://host.docker.internal:8080
-      - PathBase=http://host.docker.internal:5003
       - Redis__CacheTimeout=48:00:00
       - Redis__ConnectionString=host.docker.internal:6380
       - Redis__EnvVar=
+      - BasePath=/basket
+      - BasketApi=http://host.docker.internal:5003
+      - GlobalUrl=http://host.docker.internal:8080
       - SpaUrl=http://host.docker.internal:5001
+      - HttpLoggint=false
       - Nginx__UseNginx=false
       - Nginx__UseInitFile=true
       - Nginx__UsePort=false
