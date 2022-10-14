@@ -72,20 +72,20 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5002
-      - BasePath=/identity
-      - BasketApi=http://host.docker.internal:5003
-      - CatalogApi=http://host.docker.internal:5000
-      - GlobalUrl=http://host.docker.internal:8080
-      - IdentityUrl=http://host.docker.internal:5002
-      - SpaUrl=http://host.docker.internal:5001
-      - HttpLoggint=false
+      - App__BasePath=/identity
+      - App__BasketApi=http://host.docker.internal:5003
+      - App__CatalogApi=http://host.docker.internal:5000
+      - App__GlobalUrl=http://host.docker.internal:8080
+      - App__IdentityUrl=http://host.docker.internal:5002
+      - App__SpaUrl=http://host.docker.internal:5001
+      - App__HttpLoggint=false
       - Nginx__UseNginx=false
       - Nginx__UseInitFile=true
-      - Nginx__UsePort=false
       - Nginx__UseUnixSocket=false
+      - Nginx__UsePort=false
       - Nginx__InitFilePath=/tmp/app-initialized
-      - Nginx__Port=
       - Nginx__UnixSocketPath=/tmp/nginx.socket
+      - Nginx__Port=
     ports:
       - "5002:5002"
     expose:
@@ -107,6 +107,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5000
+      - App__BasePath=/catalog
+      - App__BaseUrl=http://host.docker.internal:5000
+      - App__GlobalUrl=http://host.docker.internal:8080
+      - App__SpaUrl=http://host.docker.internal:5001
+      - App__HttpLoggint=false
       - Authorization__Authority=http://host.docker.internal:5002
       - Authorization__SiteAudience=host.docker.internal
       - Catalog__CdnHost=http://host.docker.internal:8080
@@ -115,18 +120,13 @@ services:
       - Client__Secret=secret
       - Database__ConnectionString=server=host.docker.internal;port=5433;database=catalog;uid=postgres;password=postgres;
       - Database__EnvVar=
-      - BasePath=/catalog
-      - CatalogApi=http://host.docker.internal:5000
-      - GlobalUrl=http://host.docker.internal:8080
-      - SpaUrl=http://host.docker.internal:5001
-      - HttpLoggint=false
       - Nginx__UseNginx=false
       - Nginx__UseInitFile=true
-      - Nginx__UsePort=false
       - Nginx__UseUnixSocket=false
+      - Nginx__UsePort=false
       - Nginx__InitFilePath=/tmp/app-initialized
-      - Nginx__Port=
       - Nginx__UnixSocketPath=/tmp/nginx.socket
+      - Nginx__Port=
     ports:
       - "5000:5000"
     expose:
@@ -148,6 +148,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_FORWARDEDHEADERS_ENABLED=true
       - ASPNETCORE_URLS=http://+:5003
+      - App__BasePath=/basket
+      - App__BaseUrl=http://host.docker.internal:5003
+      - App__GlobalUrl=http://host.docker.internal:8080
+      - App__SpaUrl=http://host.docker.internal:5001
+      - App__HttpLoggint=false
       - Authorization__Authority=http://host.docker.internal:5002
       - Authorization__SiteAudience=host.docker.internal
       - Client__Id=basket
@@ -155,18 +160,13 @@ services:
       - Redis__CacheTimeout=48:00:00
       - Redis__ConnectionString=host.docker.internal:6380
       - Redis__EnvVar=
-      - BasePath=/basket
-      - BasketApi=http://host.docker.internal:5003
-      - GlobalUrl=http://host.docker.internal:8080
-      - SpaUrl=http://host.docker.internal:5001
-      - HttpLoggint=false
       - Nginx__UseNginx=false
       - Nginx__UseInitFile=true
-      - Nginx__UsePort=false
       - Nginx__UseUnixSocket=false
+      - Nginx__UsePort=false
       - Nginx__InitFilePath=/tmp/app-initialized
-      - Nginx__Port=
       - Nginx__UnixSocketPath=/tmp/nginx.socket
+      - Nginx__Port=
     ports:
       - "5003:5003"
     expose:
